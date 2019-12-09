@@ -2,7 +2,9 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { TalksDataSource, TalksItem } from './talks-datasource';
+import { TalksDataSource } from './talks-datasource';
+import {TalksService} from './talks.service';
+import {Talk} from './talk';
 
 @Component({
   selector: 'app-talks',
@@ -12,14 +14,16 @@ import { TalksDataSource, TalksItem } from './talks-datasource';
 export class TalksComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
-  @ViewChild(MatTable, {static: false}) table: MatTable<TalksItem>;
+  @ViewChild(MatTable, {static: false}) table: MatTable<Talk>;
   dataSource: TalksDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['name', 'speakers'];
+
+  constructor(private talksService: TalksService) {}
 
   ngOnInit() {
-    this.dataSource = new TalksDataSource();
+    this.dataSource = new TalksDataSource(this.talksService);
   }
 
   ngAfterViewInit() {

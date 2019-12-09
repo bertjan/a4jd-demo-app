@@ -5,6 +5,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 import { TalksComponent } from './talks.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('TalksComponent', () => {
   let component: TalksComponent;
@@ -18,6 +19,7 @@ describe('TalksComponent', () => {
         MatPaginatorModule,
         MatSortModule,
         MatTableModule,
+        HttpClientTestingModule
       ]
     }).compileComponents();
   }));
